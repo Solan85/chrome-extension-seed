@@ -51,12 +51,10 @@ chrome.runtime.onMessage.addListener(
 
 function storeSetting() {
 	chrome.storage.sync.set({ settingKey: settings }, null);
-	setIcon();
 }
 
 function getSetting() {
 	chrome.storage.sync.get('settingKey', function (items) {
 		settings = items.settingKey ? items.settingKey : settings;
-		setIcon();
 	});
 }

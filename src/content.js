@@ -12,5 +12,7 @@ chrome.runtime.onMessage.addListener(
                 console.log('ContentJS: Dummy message received ');
                 console.log(request.someData);
                 break;
-        });
+        }
+    });
 // ---------------------------------------
+console.log('Content script loaded');

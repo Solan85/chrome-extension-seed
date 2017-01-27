@@ -1,30 +1,22 @@
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
 var del = require('del');
 var uglify = require('gulp-uglify');
 var pump = require('pump');
 var cleanCSS = require('gulp-clean-css');
-var typescript = require('gulp-tsc');
 const zip = require('gulp-zip');
-var fs = require('fs');
+
 var manifest = require('./manifest.json');
 
 const otherDependencies = [
-    'src/some-image.png',
-    'src/popup.js',
     'node_modules/materialize-css/dist/css/materialize.min.css',
-    'src/popup.css',
-    'node_modules/materialize-css/dist/js/materialize.min.js' 
+    'node_modules/nouislider/distribute/nouislider.min.css',
+    'node_modules/materialize-css/dist/js/materialize.min.js',
+    'node_modules/nouislider/distribute/nouislider.min.js',
+    'src/popup.js',
+    'src/popup.css'
 ];
 
 var destination;
-
-
-// gulp.task('compile', function(){
-//   gulp.src(['src/**/*.ts'])
-//     .pipe(typescript())
-//     .pipe(gulp.dest(destination))
-// });
 
 // it will pick everything from dist/prod and zip
 gulp.task('build.zip', function () {
@@ -76,7 +68,7 @@ function build(forProd) {
     if (manifest.background) {
         var scripts = manifest.background.scripts;
         for (var index in scripts) {
-            forProd ? uglifyThenMove(scripts[index]) : moveJS(scripts[index]);
+            forProd ? uglifyThenMove(scripts[index]) : move(scripts[index]);
         }
 
         if (manifest.background.page) {
@@ -88,12 +80,12 @@ function build(forProd) {
         for (var contentScript of manifest.content_scripts) {
             var cssFiles = contentScript.css;
             for (var index in cssFiles) {
-                forProd ? minifyCssThenMove(cssFiles[index]) : moveJS(cssFiles[index]);
+                forProd ? minifyCssThenMove(cssFiles[index]) : move(cssFiles[index]);
             }
 
             var jsFiles = contentScript.js;
             for (var index in jsFiles) {
-                forProd ? uglifyThenMove(jsFiles[index]) : moveJS(jsFiles[index]);
+                forProd ? uglifyThenMove(jsFiles[index]) : move(jsFiles[index]);
             }
         }
     }
@@ -124,7 +116,7 @@ function build(forProd) {
 
     for (var dep of otherDependencies) {
         if (IfJsFile(dep)) {
-            forProd ? uglifyThenMove(dep) : moveJS(dep);
+            forProd ? uglifyThenMove(dep) : move(dep);
         } else if (IfCssFile(dep)) {
             forProd ? minifyCssThenMove(dep) : move(dep);
         } else {
@@ -137,9 +129,12 @@ function build(forProd) {
 }
 
 function minifyCssThenMove(css) {
+
     return gulp.src(css, { base: './' })
         .pipe(cleanCSS({ compatibility: 'ie8' }))
         .pipe(gulp.dest(destination));
+
+    console.log(css);
 }
 
 function moveIcons(icons) {
@@ -150,55 +145,24 @@ function moveIcons(icons) {
     }
 }
 
-function uglifyThenMove(srcFile) {
-    fileExists(srcFile, function (exists) {
-        if (!exists) {
-            var arr = srcFile.split('.');
-            srcFile = arr[0] + '.ts';
-        }
-        pump([
-            gulp.src(srcFile, { base: './' }),
-            gulpif(!exists, typescript()),
-            uglify({
-                mangle: true
-            }),
-            gulp.dest(destination)
-        ],
-            undefined
-        );
-    });
-}
-
-function moveJS(srcFile) {
-    console.log(srcFile);
-    fileExists(srcFile, function (exists) {
-        if (!exists) {
-            var arr = srcFile.split('.');
-            srcFile = arr[0] + '.ts';
-        }
-        pump([
-            gulp.src(srcFile, { base: './' }),
-            gulpif(!exists, typescript()),
-            gulp.dest(destination)
-        ],
-            undefined
-        );
-    });
+function uglifyThenMove(js) {
+    pump([
+        gulp.src(js, { base: './' }),
+        uglify({
+            mangle: true
+        }),
+        gulp.dest(destination)
+    ],
+        undefined
+    );
+    console.log(js);
 }
 
 function move(srcFile) {
     gulp.src(srcFile, { base: './' })
         .pipe(gulp.dest(destination));
-}
 
-function fileExists(file, cb) {
-    fs.stat(file, function (err, stat) {
-        if (err == null) {
-            cb(true);
-        } else {
-            cb(false);
-        }
-    });
+    // console.log(srcFile);
 }
 
 function IfCssFile(file) {

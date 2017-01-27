@@ -9,7 +9,7 @@
     "build.dev": "./node_modules/.bin/gulp build.dev",
     "build.prod": "./node_modules/.bin/gulp build.prod",
     "watch.build.dev": "./node_modules/.bin/gulp watch.build.dev",
-    "build.zip": "npm run build.prod && npm run zip",
+    "build.zip": "npm run clean && npm run build.prod && npm run zip",
     "clean": "./node_modules/.bin/gulp clean",
     "zip": "./node_modules/.bin/gulp build.zip"
   },
