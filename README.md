@@ -1,27 +1,39 @@
 # chrome-extension-seed
-A project template for chrome extension development with all necessary scripts for build in dev and prod mode.
+A project template for chrome extension development with all necessary scripts to build in dev and prod mode.
 
 How to use?
+
+
 Download this project. 
+
 Update package.json and manifest.json with your respective project details.
 
+
 For development build: 
+
 `npm run build.dev`
 
 It will build and post files to `dist/dev`. Then point your chrome extension to this path.
 
+
 For continuous development and build use:
+
 `npm run watch.build.dev`
 
 It watches for any file change while you develop and automatically post build files to `dist/dev`
 
 
+
 For production build use:
+
 `npm run build.prod`
 
 It will minify your JS and CSS, then post to `dist/prod` folder
 
+
+
 Before uploading to Chrome Extension Developer dashboard use:
+
 `npm run build.zip`
 
 It will:
@@ -29,6 +41,7 @@ It will:
 - build in prod mode
 - zip whatever there in prod folder
 
+CLEANING..
 
 `npm run clean`
 
