@@ -20,7 +20,7 @@ var destination;
 
 // it will pick everything from dist/prod and zip
 gulp.task('build.zip', function () {
-    gulp.src('dist/prod/*')
+    gulp.src('dist/prod/**/*.*')
         .pipe(zip('dist.zip'))
         .pipe(gulp.dest('dist'))
 });
