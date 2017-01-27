@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "none",
+    "target": "es5",
+    "noImplicitAny": false,
+    "sourceMap": false
+  },
+  "files": [
+    "./typings/main.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

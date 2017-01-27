@@ -1,0 +1,33 @@
+{
+  "name": "chrome-extension-seed",
+  "version": "0.0.1",
+  "description": "A project template for Chrome Extension development.",
+  "repository": {
+    "url": "https://github.com/sonalsavaratkar/chrome-extension-seed.git"
+  },
+  "scripts": {
+    "build.dev": "./node_modules/.bin/gulp build.dev",
+    "build.prod": "./node_modules/.bin/gulp build.prod",
+    "watch.build.dev": "./node_modules/.bin/gulp watch.build.dev",
+    "build.zip": "npm run build.prod && npm run zip",
+    "clean": "./node_modules/.bin/gulp clean",
+    "zip": "./node_modules/.bin/gulp build.zip"
+  },
+  "author": "Sonal Savaratkar",
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-if": "^2.0.2",
+    "gulp-tsc": "^1.2.6",
+    "gulp-uglify": "^2.0.1",
+    "gulp-zip": "^4.0.0",
+    "pump": "^1.0.2",
+    "typescript": "^2.1.5"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "materialize-css": "^0.97.8"
+  }
+}
