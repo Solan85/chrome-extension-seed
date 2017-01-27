@@ -8,46 +8,48 @@ How to use?
 - manifest.json with your respective project details.
 - For development build: 
 
-`npm run build.dev`
+    `npm run build.dev`
 
-It will build and post files to `dist/dev`. Then point your chrome extension to this path.
+    It will build and post files to `dist/dev`. Then point your chrome extension to this path.
 
-- For continuous development and build use:
+- For continuous development and build, use:
 
-`npm run watch.build.dev`
+    `npm run watch.build.dev`
 
-It watches for any file change while you develop and automatically post build files to `dist/dev`
+    It watches for any file change while you develop and automatically post build files to `dist/dev`
 
 
 
 - For production build use:
 
-`npm run build.prod`
+    `npm run build.prod`
 
-It will minify your JS and CSS, then post to `dist/prod` folder
+    It will minify your JS and CSS, then post to `dist/prod` folder
 
 
 
 - Before uploading to Chrome Extension Developer dashboard use:
 
-`npm run build.zip`
+    `npm run build.zip`
 
-It will:
-- clean your dist
-- build in prod mode
-- zip whatever there in prod folder
+    It will:
+    - clean your dist
+    - build in prod mode
+    - zip whatever there in prod folder
+    - at location dist/dist.zip
 
-CLEANING..
 
-`npm run clean`
+- cleaning...
 
-is to clean your dist folder.
+    `npm run clean`
+
+    is to clean your dist folder.
 
 ADDING DEPENDENCIES
 -------------------
 To build, gulp reads manifest.json file to know all JS, CSS and other files required to build this project. But some files are not mentioned in manifest.json file though they are required. For example `popup.js` file. It is simply referred from `popup.html` file and no where mentioned in `manifest.json` file. Also there can be some images referred by popup.html file.
 
-To include these DEPENDENCIES in the build:
+To include such DEPENDENCIES in the build:
 - go to gulpfile.js
 - find variable `otherDependencies`
 - its an array of strings
