@@ -19,9 +19,11 @@ const otherDependencies = [
 var destination;
 
 // it will pick everything from dist/prod and zip
-gulp.task('build.zip', function () {
+gulp.task('build.zip', function() {
+    var zipFileName = manifest.version;
+    zipFileName = 'dist.' + zipFileName + '.zip';
     gulp.src('dist/prod/**/*.*')
-        .pipe(zip('dist.zip'))
+        .pipe(zip(zipFileName))
         .pipe(gulp.dest('dist'))
 });
 
@@ -147,15 +149,18 @@ function moveIcons(icons) {
 
 function uglifyThenMove(js) {
     pump([
-        gulp.src(js, { base: './' }),
-        uglify({
-            mangle: true
-        }),
-        gulp.dest(destination)
-    ],
-        undefined
+            gulp.src(js, { base: './' }),
+            uglify({
+                mangle: true
+            }),
+            gulp.dest(destination)
+        ],
+        function(err) {
+            if (err) {
+                console.log(err);
+            }
+        }
     );
-    console.log(js);
 }
 
 function move(srcFile) {

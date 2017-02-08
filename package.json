@@ -1,6 +1,6 @@
 {
   "name": "chrome-extension-seed",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A project template for Chrome Extension development.",
   "repository": {
     "url": "https://github.com/sonalsavaratkar/chrome-extension-seed.git"
@@ -8,10 +8,10 @@
   "scripts": {
     "build.dev": "./node_modules/.bin/gulp build.dev",
     "build.prod": "./node_modules/.bin/gulp build.prod",
+    "build.zip": "./node_modules/.bin/gulp build.zip",
     "watch.build.dev": "./node_modules/.bin/gulp watch.build.dev",
-    "build.zip": "npm run clean && npm run build.prod && npm run zip",
-    "clean": "./node_modules/.bin/gulp clean",
-    "zip": "./node_modules/.bin/gulp build.zip"
+    "zip": "npm run clean && npm run build.prod && npm run build.zip",
+    "clean": "./node_modules/.bin/gulp clean"
   },
   "author": "Sonal Savaratkar",
   "license": "MIT",
