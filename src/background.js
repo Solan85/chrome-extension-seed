@@ -9,11 +9,6 @@ var settings = {
 getSetting();
 RegisterEvents();
 
-var arr = [1,2,3];
-for(var item in arr) {
-	console.log(item);
-}
-
 function RegisterEvents() {
 	chrome.runtime.onInstalled.addListener(function (details) {
 		switch (details.reason) {
