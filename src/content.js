@@ -16,3 +16,9 @@ chrome.runtime.onMessage.addListener(
     });
 // ---------------------------------------
 console.log('Content script loaded');
+
+$(document).ready(function(){
+    var url = chrome.runtime.getURL("src/Takkun.svg");
+    $('body').css('background-image', 'url('+ url +')');
+
+});

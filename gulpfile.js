@@ -13,7 +13,8 @@ const otherDependencies = [
     'node_modules/materialize-css/dist/js/materialize.min.js',
     'node_modules/nouislider/distribute/nouislider.min.js',
     'src/popup.js',
-    'src/popup.css'
+    'src/popup.css',
+    'src/Takkun.svg'
 ];
 
 var destination;
