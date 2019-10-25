@@ -25,7 +25,8 @@
     },
     "permissions": [
         "tabs",
-        "storage"
+        "storage",
+        "contextMenus"
     ],
     "content_scripts": [
         {

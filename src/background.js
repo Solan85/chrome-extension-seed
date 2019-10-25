@@ -38,7 +38,7 @@ chrome.runtime.onMessage.addListener(
 	function (request, sender, sendResponse) {
 		switch (request.type) {
 			case 'DummyMessageFromPopup':
-			console.log('In background.js, dummy message recieved with data: ' + request.someData);
+				console.log('In background.js, dummy message recieved with data: ' + request.someData);
 				break;
 		}
 	});
@@ -57,3 +57,15 @@ function getSetting() {
 		settings = items.settingKey ? items.settingKey : settings;
 	});
 }
+
+
+chrome.contextMenus.create({
+	title: "Add a reminder",
+	contexts: ["page"], 
+	onclick: searchUrbanDict
+});
+
+function addReminder() {
+	alert('reminder set');
+}
+
