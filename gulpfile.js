@@ -9,9 +9,7 @@ var manifest = require('./manifest.json');
 
 const otherDependencies = [
     'node_modules/materialize-css/dist/css/materialize.min.css',
-    'node_modules/nouislider/distribute/nouislider.min.css',
     'node_modules/materialize-css/dist/js/materialize.min.js',
-    'node_modules/nouislider/distribute/nouislider.min.js',
     'src/popup.js',
     'src/popup.css'
 ];
@@ -19,7 +17,7 @@ const otherDependencies = [
 var destination;
 
 // it will pick everything from dist/prod and zip
-gulp.task('build.zip', function() {
+gulp.task('build.zip', async  function() {
     var zipFileName = manifest.version;
     zipFileName = 'dist.' + zipFileName + '.zip';
     gulp.src('dist/prod/**/*.*')
@@ -27,13 +25,13 @@ gulp.task('build.zip', function() {
         .pipe(gulp.dest('dist'))
 });
 
-gulp.task('build.dev', function () {
+gulp.task('build.dev',async  function () {
     destination = 'dist/dev';
     build(false);
 });
 
 
-gulp.task('watch.build.dev', function () {
+gulp.task('watch.build.dev',async  function () {
     gulp.watch('src/**/*.*', ['build.dev']);
 });
 
@@ -41,7 +39,7 @@ gulp.task('clean', function () {
     return del(['dist']);
 });
 
-gulp.task('build.prod', function () {
+gulp.task('build.prod',async  function () {
     destination = 'dist/prod';
     build(true);
 });
